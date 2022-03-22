@@ -4,7 +4,7 @@
         stage ('Initialize') {
             steps {
                 sh '''
-                    echo "PATH = ${PATH}"
+                    
                     echo "maven = ${maven}"
                 '''
             }
