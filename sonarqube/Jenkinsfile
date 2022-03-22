@@ -11,28 +11,27 @@ pipeline{
         }
 
 
-       stage('GetCode'){
+       stage('GetCode') {
             steps{
                 git 'https://github.com/bio170/DevOps.git'
             }
          }        
-       stage('Build'){
-            steps{
+       stage('Build') {
+            steps {
                 sh 'mvn clean package'
             }
          }
         stage('SonarQube analysis') {
-        steps{
+        steps {
         withCredentials([string(credentialsId: 'Sonarqube-1test', variable: 'sonarqube')]) {
-        { 
-        
         sh "mvn sonar:sonar"
-    }
-} 
+    
+          } 
+
         }
         }
+        
        
     }
 }
-
 
