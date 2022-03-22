@@ -6,8 +6,8 @@ pipeline{
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "maven = ${maven}"
-                '''
             }
+            '''
         }
 
 
@@ -30,8 +30,10 @@ pipeline{
 
         }
         }
-        
+
        
     }
+}
+
 }
 
