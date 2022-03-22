@@ -1,4 +1,4 @@
-pipeline{
+ pipeline{
     agent any
     stages {
         stage ('Initialize') {
@@ -6,8 +6,10 @@ pipeline{
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "maven = ${maven}"
+                '''
             }
-            '''
+
+
         }
 
 
@@ -36,4 +38,3 @@ pipeline{
 }
 
 }
-
