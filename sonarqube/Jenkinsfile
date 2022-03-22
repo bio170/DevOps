@@ -13,7 +13,7 @@ tools {
          }        
        stage('Build') {
             steps {
-                sh 'mvn -v'
+                sh 'echo hello world'
             }
          }
         stage('SonarQube analysis') {
