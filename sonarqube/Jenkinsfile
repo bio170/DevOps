@@ -1,9 +1,16 @@
 pipeline{
     agent any
-    environment {
-        PATH = "$Maven_Home: C:\Program Files\apache-maven-3.8.1\bin"
-    }
-    stages{
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+
+
        stage('GetCode'){
             steps{
                 git 'https://github.com/bio170/DevOps.git'
@@ -15,15 +22,17 @@ pipeline{
             }
          }
         stage('SonarQube analysis') {
-//    def scannerHome = tool 'SonarQube scanner 4.6.2';
         steps{
-        withSonarQubeEnv('sonarQube-9.3') { 
-        // If you have configured more than one global server connection, you can specify its name
-//      sh "${scannerHome}/bin/sonar-scanner"
+        withCredentials([string(credentialsId: 'Sonarqube-1test', variable: 'sonarqube')]) {
+        { 
+        
         sh "mvn sonar:sonar"
     }
+} 
         }
         }
        
     }
 }
+
+
