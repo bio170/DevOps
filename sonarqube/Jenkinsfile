@@ -1,10 +1,11 @@
  pipeline{
     agent any
-tools {
+    tools {
   maven 'maven'
 }
     stages {
-       
+      
+
 
        stage('GetCode') {
             steps{
@@ -13,13 +14,15 @@ tools {
          }        
        stage('Build') {
             steps {
-                sh 'hello world'
+                sh 'mvn clean package'
             }
          }
         stage('SonarQube analysis') {
         steps {
-        withCredentials([string(credentialsId: 'Sonarqube-1test', variable: 'sonarqube')]) {
-        sh "mvn sonar:sonar"
+        withSonarQubeEnv(credentialsId: 'Sonarqube-1test') {
+         sh "mvn sonar:sonar"
+}
+       
     
           } 
 
@@ -28,5 +31,5 @@ tools {
 
        
     }
-}
+
 
